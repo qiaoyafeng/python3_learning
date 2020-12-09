@@ -8,21 +8,19 @@ import re
 import requests
 
 
-
-
 respose = requests.get('https://venturewell.org/i-corps/llpvideos/')
 # print(respose.status_code) # 响应的状态码
 # print(respose.content)   #返回字节信息
 # print(respose.text)   #返回文本内容
 
-mytext="""
+mytext = """
 <h2><a href="https://venturewell.org/i-corps/llpvideos/mentor-training/" target="_blank" rel="noopener">Mentor Training</a></h2>
 """
 patternstr1 = "<h2>.+href=(\"http.+).+target.+>(.+).+</a></h2>"
-#patternstr1 = r"<a .*?>(.*?)</a>"
+# patternstr1 = r"<a .*?>(.*?)</a>"
 pattern = re.compile(patternstr1)
 
-url_namelist = pattern.findall( respose.text,re.S)
+url_namelist = pattern.findall(respose.text, re.S)
 print('1111111111111111111111111111111')
 print(url_namelist)
 

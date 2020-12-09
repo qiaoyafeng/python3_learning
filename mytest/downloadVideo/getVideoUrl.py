@@ -3,11 +3,8 @@
 # @Date  : 2019/2/28
 # @Desc  :
 
-
-
 import re
 import requests
-
 
 
 def getRegExlist(patterntest,patternstr):
@@ -49,4 +46,4 @@ def getPageVideoList(myvideopagelist):
     pass
 
 
-#getPageVideoList(myvideopagelist)
+# getPageVideoList(myvideopagelist)
