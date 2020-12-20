@@ -1,6 +1,6 @@
 # Learn Python3 
 
-本工程主要是用来学习Linux 
+本工程主要是用来学习Python3 
 
 ## 目录结构
 
