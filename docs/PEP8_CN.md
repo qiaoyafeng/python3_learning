@@ -92,70 +92,68 @@ Guido的主要见解之一是代码被读取的次数多于其编写的次数。
 续行应该使用在括号，方括号和花括号内使用Python的隐式线垂直对齐包装的元素，或使用悬挂式缩进 [7]。使用悬挂式缩进时，应考虑以下几点：第一行不应包含任何参数，并且应使用进一步的缩进形式将其清楚地区分为延续行：
 
 ```
-# Correct:
+# 正确：
 
-# Aligned with opening delimiter.
+# 与开始的分隔符对齐。
 foo = long_function_name(var_one, var_two,
                          var_three, var_four)
 
-# Add 4 spaces (an extra level of indentation) to distinguish arguments from the rest.
+# 添加4个空格（缩进的额外级别）以区分参数和其余参数。
 def long_function_name(
         var_one, var_two, var_three,
         var_four):
     print(var_one)
 
-# Hanging indents should add a level.
+# 悬挂缩进应该增加一个层次。注意第一行不应包含参数
 foo = long_function_name(
     var_one, var_two,
     var_three, var_four)
-# Wrong:
+# 错误：
 
-# Arguments on first line forbidden when not using vertical alignment.
+# 当不使用垂直对齐时，禁止在第一行使用参数。
 foo = long_function_name(var_one, var_two,
     var_three, var_four)
 
-# Further indentation required as indentation is not distinguishable.
+# 由于缩进无法区分，因此需要进一步缩进。
 def long_function_name(
     var_one, var_two, var_three,
     var_four):
     print(var_one)
 ```
 
-The 4-space rule is optional for continuation lines.
+对于连续行，4空格规则是可选的。
 
-Optional:
+可选的：
 
 ```
-# Hanging indents *may* be indented to other than 4 spaces.
+# 悬挂缩进可以缩进不超过4个空格。
 foo = long_function_name(
   var_one, var_two,
   var_three, var_four)
 ```
 
-When the conditional part of an `if`-statement is long enough to require that it be written across multiple lines, it's worth noting that the combination of a two character keyword (i.e. `if`), plus a single space, plus an opening parenthesis creates a natural 4-space indent for the subsequent lines of the multiline conditional. This can produce a visual conflict with the indented suite of code nested inside the `if`-statement, which would also naturally be indented to 4 spaces. This PEP takes no explicit position on how (or whether) to further visually distinguish such conditional lines from the nested suite inside the `if`-statement. Acceptable options in this situation include, but are not limited to:
+当if语句的条件部分长到需要换行写的时候，注意可以在两个字符关键字的连接处（比如if），增加一个空格，再增加一个左括号来创造一个4空格缩进的多行条件。这会与if语句内同样使用4空格缩进的代码产生视觉冲突。PEP没有明确指明要如何区分i发的条件代码和内嵌代码。可使用的选项包括但不限于下面几种情况：
 
 ```
-# No extra indentation.
+# 没有额外的缩进。
 if (this_is_one_thing and
     that_is_another_thing):
     do_something()
 
-# Add a comment, which will provide some distinction in editors
-# supporting syntax highlighting.
+# 添加评论，这将在编辑器中提供一些区别
+# 支持语法突出显示。
 if (this_is_one_thing and
     that_is_another_thing):
     # Since both conditions are true, we can frobnicate.
     do_something()
 
-# Add some extra indentation on the conditional continuation line.
+# 在条件延续行上添加一些额外的缩进。
 if (this_is_one_thing
         and that_is_another_thing):
     do_something()
 ```
 
-(Also see the discussion of whether to break before or after binary operators below.)
-
-The closing brace/bracket/parenthesis on multiline constructs may either line up under the first non-whitespace character of the last line of list, as in:
+在多行结构中的大括号/中括号/小括号的右括号可以与内容对齐单独起一行作为最后一行的第一个字符，就像这样：
 
 ```
 my_list = [
@@ -168,7 +166,7 @@ result = some_function_that_takes_arguments(
     )
 ```
 
-or it may be lined up under the first character of the line that starts the multiline construct, as in:
+或者也可以与多行结构的第一行第一个字符对齐，就像这样：
 
 ```
 my_list = [
@@ -181,15 +179,15 @@ result = some_function_that_takes_arguments(
 )
 ```
 
-## [Tabs or Spaces?](https://www.python.org/dev/peps/pep-0008/#id18)
+## [制表符或空格？]
 
-Spaces are the preferred indentation method.
+空格是首选的缩进方法。
 
-Tabs should be used solely to remain consistent with code that is already indented with tabs.
+制表符应仅用于与已经用制表符缩进的代码保持一致。
 
-Python 3 disallows mixing the use of tabs and spaces for indentation.
+Python 3不允许混合使用制表符和空格进行缩进。
 
-Python 2 code indented with a mixture of tabs and spaces should be converted to using spaces exclusively.
+缩进制表符和空格混合在一起的Python 2代码应转换为仅使用空格。
 
 When invoking the Python 2 command line interpreter with the `-t` option, it issues warnings about code that illegally mixes tabs and spaces. When using `-tt` these warnings become errors. These options are highly recommended!
 
