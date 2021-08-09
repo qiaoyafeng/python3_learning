@@ -140,6 +140,9 @@ cython_debug/
 # PyCharm 
 .idea/
 
+# Visual Studio Code 
+.vscode/
+
 # nodejs module
 
 /docs/node_modules
