@@ -1,86 +1,3 @@
-共两题，要求为纸上写代码，总时间 30 min，请合理分配时间
-（若在线答题，要求在注释中阐述设计思路，这样做的优缺点)
-
-1，实现函数，输入字符串，输出其对应的对象：
-```
-Input:
-string1 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
-
-Output:
-obj1 = {
-    "ITEM0001": 1,
-    "ITEM0013": 2,
-    "ITEM0022": 1,
-}
-
-```
-
-2，在上题的基础上，增加额外信息
-ITEM 指的是商品：
-ITEM0001 的价格 为 10；
-ITEM0013 的价格 为 20；
-ITEM0022 的价格 为 30。
-
-```
-Input:
-string1 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
-
-Output:
-80
-
-
-Input:
-string1 = '["ITEM0006 x 1"]'
-
-Output:
-"ITEM 不合法！"
-```
-
-3，「附加题」在上两题的基础上，增加额外信息
-优惠 1：
-同时购买 ITEM0001 和 ITEM0022，则该商品半价
-
-优惠 2：
-满 100 减 30
-
-优惠只能选一种。自动计算多种优惠的结果，并输出最优结果。
-
-```
-Input:
-string1 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
-
-Output:
-60
-"优惠 1"
-
-Input:
-string1 = '["ITEM0001 x 1", "ITEM0013 x 3", "ITEM0022 x 1"]'
-
-Output:
-70
-"优惠 2"
-```
-
-4，mongodb 数据库表设计：
-将第 2 题的商品表放到数据库中，
-将第 3 题的优惠结果放到数据库中。
-
-
-
-4-1 商品表
-
-
-
-4-2 优惠结果表
-
-
-
-
-网上查到的答案：
-
-https://v3u.cn/bbs/?thread-484.htm
-
-```
 # -*- coding: utf-8 -*-
 # @Date    : 2021/6/3 13:23
 # @Author  : Duxiaolong
@@ -88,6 +5,7 @@ https://v3u.cn/bbs/?thread-484.htm
 import json
 from typing import Union, Optional, Tuple, Dict
 from collections import defaultdict
+import datetime
 
 from mongoengine import *
 
@@ -209,7 +127,7 @@ class GoodsForm(Document):
     """
     name = StringField(required=True, verbose_name='商品名称')
     price = IntField(default=0, verbose_name='商品价格')
-    create_time = DateField(default=datetime.today().date(), verbose_name='创建时间')
+    create_time = DateField(default=datetime.datetime.now(), verbose_name='创建时间')
 
 
 class OrderForm(Document):
@@ -224,16 +142,14 @@ class OrderForm(Document):
 
 if __name__ == '__main__':
     obj = Test()
-    # info1 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
-    # print(obj.first_question(info1))
-    # info2 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
-    # info2 = '["ITEM0006 x 1"]'
-    # print(obj.second_question(info2))
-    info3 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
-    info4 = '["ITEM0001 x 1", "ITEM0013 x 3", "ITEM0022 x 1"]'
+    info1 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
+    print(obj.first_question(info1))
+    info2 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
+    info3 = '["ITEM0006 x 1"]'
+    print(obj.second_question(info2))
+    print(obj.second_question(info3))
+    info4 = '["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]'
+    info5 = '["ITEM0001 x 1", "ITEM0013 x 3", "ITEM0022 x 1"]'
     print(obj.third_question(info4))
-
-
-```
-
+    print(obj.third_question(info5))
 
